@@ -25,4 +25,5 @@ code {
   border: none;
   font-size: 1.5em;
   color: black;
+  cursor: pointer;
 }

@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.buttonGrid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+}
+
+.buttonGrid button {
+  height: 68px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1.5em;
+  color: black;
+}

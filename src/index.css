@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.calculatorWrapper {
+  margin: auto;
+  width: 90%;
+  max-width: 350px;
+}
 
 .buttonGrid{
   display: grid;
@@ -28,10 +33,28 @@ code {
   cursor: pointer;
 }
 
-.buttonGrid button:active {
-  background:#4B5EFC
+.buttonGrid button:nth-child(4n) {
+  background: #8893f6 !important; 
 }
 
-.calculatorWrapper h2 {
+/* Different color for buttons in the first row */
+.buttonGrid button:nth-child(-n+4) {
+  background: #9294a7;
+}
+
+.buttonGrid button:active {
+  background:#8893f6;
+}
+
+.calculatorWrapper h1 {
   text-align: right;
+}
+
+
+/* Media Query for Mobile */
+@media only screen and (max-width: 600px) {
+  .buttonGrid button {
+      height: 80px; 
+      font-size: 2em;
+  }
 }

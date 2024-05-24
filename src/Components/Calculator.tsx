@@ -2,69 +2,79 @@ import { useState } from 'react'
 import { evaluate } from 'mathjs';
 
 const buttons = ['C', '+/-', '%', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+','.', '0', '<','=']
-const operators = ['+', '-', '×', '÷'];
+const operators = ['+', '-', '*', '/', '%'];
 
 const Calculator = () => {
     const [result, setResult] = useState('0');
-    
-  const onClickButton = (input: number|string) => {
-    // If the result is '0', set the new input, otherwise append the new input
-    if (typeof input === 'number') {
-        if (result === '0') {
-            setResult(String(input));
-          } else {
-            setResult(result + input);
-          }
-    } else {
-        const lastInput = result[result.length - 1];
 
-        if (input === 'C') {
+    const onClickButton = (input: string|number) => {
+        if (typeof input === 'number') {
+            // If the input is a number
+            handleNumberInput(input);
+        } else {
+            // If the input is a string
+            handleStringInput(input);
+        }
+    };
+
+
+const handleNumberInput = (input: number) => {
+    if (result === '0') {
+        setResult(String(input));
+    } else if (result.length < 17) {
+        // Maximum length for the result
+        console.log('hhhh')
+        setResult(result + input);
+    }
+};
+
+const handleStringInput = (input: string) => {
+    // Get the last input of the result
+    const lastInput = result[result.length - 1];
+    switch (input) {
+        case 'C':
             setResult('0');
-          } else if (input === '=') {
+            break;
+        case '=':
             try {
-              const finalValue = evaluate(result);
-              setResult(finalValue.toString());
+                const finalValue = evaluate(result);
+                setResult(finalValue.toString());
             } catch (error) {
                 setResult('Error');
             }
-          }  else if (input === '+/-') {
-            // toggle the sign of the number
-                setResult(String(-1 * parseFloat(result)));
-          } else if (input === '<') {
-            // remove the last character
+            break;
+        case '+/-':
+            // Toggle the sign of the number
+            setResult(String(-1 * parseFloat(result)));
+            break;
+        case '<':
+            // Remove the last character
             if (result.length === 1) {
-              setResult('0');
+                setResult('0');
             } else {
-              setResult(result.slice(0, -1));
+                setResult(result.slice(0, -1));
             }
-          } else if (operators.includes(input)) {
-            if (operators.includes(lastInput)) {
-                // If the last input is operator, user can not input another operator
-                setResult(result.slice(0, -1) + input);
-            }  else {
+            break;
+        default:
+            if (result.length >= 17) {
+                return;
+            }
+            if (!operators.includes(lastInput)) {
                 setResult(result + input);
-              }
-          }
-          else {
-            setResult(result + input);
-          }
-
+            }
+            break;
     }
-  };
+};
 
   return (
-
-
     <>
     <div className='calculatorWrapper'>
-
-    <h2>{result}</h2>
+    <h1>{result}</h1>
     <div className='buttonGrid'>
-        {buttons.map ((button, index) => {
-            return <button onClick={()=> onClickButton(button)} key={index}>{button}</button>
+        {buttons.map ((input, index) => {
+            return <button onClick={()=> onClickButton(input)} key={index}>{input}</button>
         } )}
-      </div>    
-      
+      </div>
       </div>
     </>
    

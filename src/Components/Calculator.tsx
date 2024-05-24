@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { evaluate } from 'mathjs';
 
 const buttons = ['C', '+/-', '%', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+','.', '0', '<','=']
-const operators = ['+', '-', '*', '/', '%'];
+const operators = ['+', '-', '*', '/', '%','.'];
 
 const Calculator = () => {
     const [result, setResult] = useState('0');
@@ -23,7 +23,6 @@ const handleNumberInput = (input: number) => {
         setResult(String(input));
     } else if (result.length < 17) {
         // Maximum length for the result
-        console.log('hhhh')
         setResult(result + input);
     }
 };

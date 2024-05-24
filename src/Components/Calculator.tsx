@@ -29,6 +29,13 @@ const Calculator = () => {
           }  else if (input === '+/-') {
             // toggle the sign of the number
                 setResult(String(-1 * parseFloat(result)));
+          } else if (input === '<') {
+            // remove the last character
+            if (result.length === 1) {
+              setResult('0');
+            } else {
+              setResult(result.slice(0, -1));
+            }
           }
           else {
             setResult(result + input);
@@ -41,9 +48,9 @@ const Calculator = () => {
 
 
     <>
-    <div className=''>
+    <div className='calculatorWrapper'>
 
-    <p>{result}</p>
+    <h2>{result}</h2>
     <div className='buttonGrid'>
         {buttons.map ((button, index) => {
             return <button onClick={()=> onClickButton(button)} key={index}>{button}</button>

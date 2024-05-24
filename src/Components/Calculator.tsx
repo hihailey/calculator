@@ -26,7 +26,11 @@ const Calculator = () => {
             } catch (error) {
                 setResult('Error');
             }
-          } else {
+          }  else if (input === '+/-') {
+            // toggle the sign of the number
+                setResult(String(-1 * parseFloat(result)));
+          }
+          else {
             setResult(result + input);
           }
 

@@ -2,13 +2,12 @@ import { useState } from 'react'
 import { evaluate } from 'mathjs';
 
 const buttons = ['C', '+/-', '%', '/', 7, 8, 9, '*', 4, 5, 6, '-', 1, 2, 3, '+','.', '0', '<','=']
-
+const operators = ['+', '-', '×', '÷'];
 
 const Calculator = () => {
     const [result, setResult] = useState('0');
     
   const onClickButton = (input: number|string) => {
-    console.log(input)
     // If the result is '0', set the new input, otherwise append the new input
     if (typeof input === 'number') {
         if (result === '0') {
@@ -17,6 +16,8 @@ const Calculator = () => {
             setResult(result + input);
           }
     } else {
+        const lastInput = result[result.length - 1];
+
         if (input === 'C') {
             setResult('0');
           } else if (input === '=') {
@@ -36,6 +37,13 @@ const Calculator = () => {
             } else {
               setResult(result.slice(0, -1));
             }
+          } else if (operators.includes(input)) {
+            if (operators.includes(lastInput)) {
+                // If the last input is operator, user can not input another operator
+                setResult(result.slice(0, -1) + input);
+            }  else {
+                setResult(result + input);
+              }
           }
           else {
             setResult(result + input);

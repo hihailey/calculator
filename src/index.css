@@ -27,3 +27,11 @@ code {
   color: black;
   cursor: pointer;
 }
+
+.buttonGrid button:active {
+  background:#4B5EFC
+}
+
+.calculatorWrapper h2 {
+  text-align: right;
+}
